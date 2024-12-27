@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { FontLoader, Font } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 
 window.addEventListener("load", init);
@@ -16,7 +16,7 @@ function init() {
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0xaaaaaa, 1.0);
-  document.getElementById('cube').appendChild(renderer.domElement);
+  document.getElementById('cube')!.appendChild(renderer.domElement);
 
   // カメラを作成
   const camera = new THREE.PerspectiveCamera(
@@ -34,14 +34,14 @@ function init() {
   controls.enableZoom = true; // ズームを有効にする
 
   // 立方体を作成する関数
-  function createBox(material, position) {
+  function createBox(material: THREE.Material, position: [number, number, number]) {
     const geometry = new THREE.BoxGeometry(500, 100, 500);
     const box = new THREE.Mesh(geometry, material);
     box.position.set(...position);
     return box;
   }
 
-  function createMaterial(color) {
+  function createMaterial(color: number) {
     return new THREE.MeshStandardMaterial({
       color: color,
       transparent: true,
@@ -60,10 +60,10 @@ function init() {
 
   // フォントローダーを使用してテキストを作成
   const loader = new FontLoader();
-  loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
+  loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font: Font) {
     const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-    function createTextMesh(text, position) {
+    function createTextMesh(text: string, position: [number, number, number]) {
       const textGeometry = new TextGeometry(text, {
         font: font,
         size: 40,
