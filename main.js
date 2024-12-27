@@ -41,26 +41,17 @@ function init() {
     return box;
   }
 
-  const material_blue = new THREE.MeshStandardMaterial({
-    color: 0x0000ff,
-    transparent: true,
-    opacity: 0.3
-  });
-  const material_red = new THREE.MeshStandardMaterial({
-    color: 0xff0000,
-    transparent: true,
-    opacity: 0.5
-  });
-  const material_green = new THREE.MeshStandardMaterial({
-    color: 0x00ff00,
-    transparent: true,
-    opacity: 0.5
-  });
+  function createMaterial(color) {
+    return new THREE.MeshStandardMaterial({
+      color: color,
+      transparent: true,
+      opacity: 0.5
+    });
+  }
 
-  // 3つの箱を作成し、それぞれの位置を調整
-  const box1 = createBox(material_blue, [0, 0, 0]);
-  const box2 = createBox(material_green, [0, (thickness + margin), 0]);
-  const box3 = createBox(material_red, [0, -1 * (thickness + margin), 0]);
+  const box1 = createBox(createMaterial(0x0000ff), [0, 0, 0]);
+  const box2 = createBox(createMaterial(0x00ff00), [0, (thickness + margin), 0]);
+  const box3 = createBox(createMaterial(0xff0000), [0, -1 * (thickness + margin), 0]);
 
   // シーンに追加
   scene.add(box1);
