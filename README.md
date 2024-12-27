@@ -1,4 +1,4 @@
-# 3D Modeling Project (English)
+# 3D Modeling Project
 
 This project is a web application that displays 3D models using Three.js. Users can rotate 3D objects with mouse operations.
 
