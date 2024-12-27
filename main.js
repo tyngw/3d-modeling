@@ -63,31 +63,23 @@ function init() {
   loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
     const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-    const textGeometry1 = new TextGeometry('back-end', {
-      font: font,
-      size: 40,
-      height: 5,
-    });
-    const textMesh1 = new THREE.Mesh(textGeometry1, textMaterial);
-    textMesh1.position.set(-200, 0, 250);
+    function createTextMesh(text, position) {
+      const textGeometry = new TextGeometry(text, {
+        font: font,
+        size: 40,
+        height: 5,
+      });
+      const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+      textMesh.position.set(...position);
+      return textMesh;
+    }
+
+    const textMesh1 = createTextMesh('back-end', [-200, 0, 250]);
+    const textMesh2 = createTextMesh('front-end', [-200, thickness, 250]);
+    const textMesh3 = createTextMesh('infrastructure', [-200, -1 * (thickness + margin), 250]);
+
     scene.add(textMesh1);
-
-    const textGeometry2 = new TextGeometry('front-end', {
-      font: font,
-      size: 40,
-      height: 5,
-    });
-    const textMesh2 = new THREE.Mesh(textGeometry2, textMaterial);
-    textMesh2.position.set(-200, (thickness), 250);
     scene.add(textMesh2);
-
-    const textGeometry3 = new TextGeometry('infrastracture', {
-      font: font,
-      size: 40,
-      height: 5,
-    });
-    const textMesh3 = new THREE.Mesh(textGeometry3, textMaterial);
-    textMesh3.position.set(-200, -1 * (thickness + margin), 250);
     scene.add(textMesh3);
   });
 
